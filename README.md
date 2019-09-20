@@ -1,3 +1,4 @@
+![Capture](https://user-images.githubusercontent.com/36857649/65355172-530b5980-dbbf-11e9-81c3-398561ac6ddf.PNG)
 # ShoppingCart
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
