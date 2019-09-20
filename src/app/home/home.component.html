@@ -1,0 +1,71 @@
+
+<nav class="navbar">
+    <div class="navbar-center">
+        <span class="nav-icon">
+            <img src="https://img.icons8.com/carbon-copy/100/000000/menu.png">
+        </span>
+        <img src="../../assets/images/Artboard – 2.svg" alt="store logo">
+        <div class="cart-btn" (click)="showCart()">
+            <span class="cart-icon">
+                <img src="https://img.icons8.com/carbon-copy/100/000000/shopping-cart.png">
+            </span>
+            <div class="cart-items">{{tnumber}}</div>
+        </div>
+    </div>
+</nav>
+<header class="hero">
+    <div class="banner">
+        <h1 class="banner-title">furniture collection</h1>
+        <button class="banner-btn">shop now</button>
+    </div>
+</header>
+
+<section class="products" >
+    <div class="section-title">
+        <h2>our products</h2>
+    </div>
+    <div class="products-center"  >
+        <article class="product" *ngFor="let item of products">
+            <div class="img-container">
+                <img src="{{item.fields.image.fields.file.url}}" alt="" class="product-img">
+                <button class="bag-btn" data-id="{{item.sys.id}}" (click)="addCart($event)">
+                    <img src="https://img.icons8.com/carbon-copy/100/000000/shopping-cart.png">
+                    <span class="btn-innerText">add to bag</span> 
+                </button>
+            </div>
+            <h3>{{item.fields.title}}</h3>
+            <h4>${{item.fields.price}}</h4>
+        </article>
+    </div>
+</section>
+
+<!-- cart -->
+<div class="cart-overlay" [class.transparentBcg]="visual">
+    <div class="cart" [class.showCart]="show">
+        <span class="close-cart" (click)="hideCart()">
+            <img src="https://img.icons8.com/carbon-copy/100/000000/close-window.png">
+        </span>
+        <h2>your cart</h2>
+        <div class="cart-content">
+            <div class="cart-item" *ngFor="let content of inCart; let i=index">
+                <img src="{{content.fields.image.fields.file.url}}" alt="product">
+                <div>
+                    <h4>{{content.fields.title}}</h4>
+                    <h5>${{content.fields.price}}</h5>
+                    <span class="remove-item" data-id={{content.sys.id}} (click)="removeItem($event)">remove</span>
+                </div>
+                <div class="arrow">
+                    <img src="https://img.icons8.com/windows/32/000000/collapse-arrow.png" 
+                    data-id={{content.sys.id}} (click)="addAmount($event)">
+                    <p class="item-amount">{{content.fields.amount}}</p>
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/expand-arrow.png"
+                     data-id={{content.sys.id}} (click)="cutAmount($event)">
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <h3>your total: $ <span class="cart-total">{{sum}}</span></h3>
+            <button class="clear-cart banner-btn" (click)="clearCart()">clear cart</button>
+        </div>
+    </div>
+</div>
